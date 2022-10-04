@@ -1,0 +1,26 @@
+mysql> use department;
+Database changed
+mysql> create table department(dept_no varchar(4),dept_name varchar(15),dept_head varchar(4));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> alter table department add dept_team varchar(9);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc department;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| dept_no   | varchar(4)  | YES  |     | NULL    |       |
+| dept_name | varchar(15) | YES  |     | NULL    |       |
+| dept_head | varchar(4)  | YES  |     | NULL    |       |
+| dept_team | varchar(9)  | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> drop table department;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> desc department;
+ERROR 1146 (42S02): Table 'department.department' doesn't exist
+mysql>
