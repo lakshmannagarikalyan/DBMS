@@ -1,0 +1,43 @@
+mysql> desc faculty;
+ERROR 1046 (3D000): No database selected
+mysql> use faculty;
+Database changed
+mysql> desc faculty;
+ERROR 1146 (42S02): Table 'faculty.faculty' doesn't exist
+mysql> use faculty;
+Database changed
+mysql> create table faculty(faculty_no varchar(4),faculty_name varchar(15),gender char(1),mobile_no int(10));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc faculty;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| faculty_no   | varchar(4)  | YES  |     | NULL    |       |
+| faculty_name | varchar(15) | YES  |     | NULL    |       |
+| gender       | char(1)     | YES  |     | NULL    |       |
+| mobile_no    | int(10)     | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
+
+mysql> alter table faculty add column_name(department_no varchar(4));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(department_no varchar(4))' at line 1
+mysql> alter table faculty add column_name(dept_no varchar(4));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(dept_no varchar(4))' at line 1
+mysql> alter table faculty add dept_no varchar(4);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc faculty;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| faculty_no   | varchar(4)  | YES  |     | NULL    |       |
+| faculty_name | varchar(15) | YES  |     | NULL    |       |
+| gender       | char(1)     | YES  |     | NULL    |       |
+| mobile_no    | int(10)     | YES  |     | NULL    |       |
+| dept_no      | varchar(4)  | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+5 rows in set (0.02 sec)
+
+mysql>
