@@ -1,0 +1,210 @@
+ mysql> \c
+mysql> create database product;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| faculty            |
+| mysql              |
+| performance_schema |
+| product            |
+| test               |
++--------------------+
+6 rows in set (0.00 sec)
+
+mysql> use product;
+Database changed
+mysql> create table product(p_no int(5),company int(10),qty int(5),rate int(10),cost int(5));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc product;
++---------+---------+------+-----+---------+-------+
+| Field   | Type    | Null | Key | Default | Extra |
++---------+---------+------+-----+---------+-------+
+| p_no    | int(5)  | YES  |     | NULL    |       |
+| company | int(10) | YES  |     | NULL    |       |
+| qty     | int(5)  | YES  |     | NULL    |       |
+| rate    | int(10) | YES  |     | NULL    |       |
+| cost    | int(5)  | YES  |     | NULL    |       |
++---------+---------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+mysql> insert into product values(1,10,2,10,20);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into product values(2,09,3,25,75);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into product values(3,10,2,30,60);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into product values(4,08,5,10,50);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into product values(5,09,2,20,40);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into product values(6,10,3,25,75);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into product values(7,10,5,30,150);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into product values(8,10,3,10,30);
+Query OK, 1 row affected (0.00 sec)
+mysql> insert into product values(9,09,2,25,50);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into product values(10,08,4,30,120);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from product;
++------+---------+------+------+------+
+| p_no | company | qty  | rate | cost |
++------+---------+------+------+------+
+|    1 |      10 |    2 |   10 |   20 |
+|    2 |       9 |    3 |   25 |   75 |
+|    3 |      10 |    2 |   30 |   60 |
+|    4 |       8 |    5 |   10 |   50 |
+|    5 |       9 |    2 |   20 |   40 |
+|    6 |      10 |    3 |   25 |   75 |
+|    7 |      10 |    5 |   30 |  150 |
+|    8 |      10 |    3 |   10 |   30 |
+|    9 |       9 |    2 |   25 |   50 |
+|   10 |       8 |    4 |   30 |  120 |
++------+---------+------+------+------+
+10 rows in set (0.00 sec)
+
+mysql> select count(*) from product;where rate>=20;
++----------+
+| count(*) |
++----------+
+|       10 |
++----------+
+1 row in set (0.00 sec)
+
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where rate>=20' at line 1
+mysql> select count(*) from product where rate>=20;
++----------+
+| count(*) |
++----------+
+|        7 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select sum(cost) from product;
++-----------+
+| sum(cost) |
++-----------+
+|       670 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select avg(cost) from product;
++-----------+
+| avg(cost) |
++-----------+
+|   67.0000 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select max(rate) from product;
++-----------+
+| max(rate) |
++-----------+
+|        30 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select min(rate) from product;
++-----------+
+| min(rate) |
++-----------+
+|        10 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select distinct cost from product;
++------+
+| cost |
++------+
+|   20 |
+|   75 |
+|   60 |
+|   50 |
+|   40 |
+|  150 |
+|   30 |
+|  120 |
++------+
+8 rows in set (0.02 sec)
+
+mysql> select * from product where cost between 20 and 60;
++------+---------+------+------+------+
+| p_no | company | qty  | rate | cost |
++------+---------+------+------+------+
+|    1 |      10 |    2 |   10 |   20 |
+|    3 |      10 |    2 |   30 |   60 |
+|    4 |       8 |    5 |   10 |   50 |
+|    5 |       9 |    2 |   20 |   40 |
+|    8 |      10 |    3 |   10 |   30 |
+|    9 |       9 |    2 |   25 |   50 |
++------+---------+------+------+------+
+6 rows in set (0.00 sec)
+
+mysql> select * from product where rate in (25);
++------+---------+------+------+------+
+| p_no | company | qty  | rate | cost |
++------+---------+------+------+------+
+|    2 |       9 |    3 |   25 |   75 |
+|    6 |      10 |    3 |   25 |   75 |
+|    9 |       9 |    2 |   25 |   50 |
++------+---------+------+------+------+
+3 rows in set (0.00 sec)
+
+mysql> select * from product where not rate=25;
++------+---------+------+------+------+
+| p_no | company | qty  | rate | cost |
++------+---------+------+------+------+
+|    1 |      10 |    2 |   10 |   20 |
+|    3 |      10 |    2 |   30 |   60 |
+|    4 |       8 |    5 |   10 |   50 |
+|    5 |       9 |    2 |   20 |   40 |
+|    7 |      10 |    5 |   30 |  150 |
+|    8 |      10 |    3 |   10 |   30 |
+|   10 |       8 |    4 |   30 |  120 |
++------+---------+------+------+------+
+7 rows in set (0.00 sec)
+
+mysql> select * from product where rate not in (10);
++------+---------+------+------+------+
+| p_no | company | qty  | rate | cost |
++------+---------+------+------+------+
+|    2 |       9 |    3 |   25 |   75 |
+|    3 |      10 |    2 |   30 |   60 |
+|    5 |       9 |    2 |   20 |   40 |
+|    6 |      10 |    3 |   25 |   75 |
+|    7 |      10 |    5 |   30 |  150 |
+|    9 |       9 |    2 |   25 |   50 |
+|   10 |       8 |    4 |   30 |  120 |
++------+---------+------+------+------+
+7 rows in set (0.00 sec)
+
+mysql> select all p_no from product where true;
++------+
+| p_no |
++------+
+|    1 |
+|    2 |
+|    3 |
+|    4 |
+|    5 |
+|    6 |
+|    7 |
+|    8 |
+|    9 |
+|   10 |
++------+
+10 rows in set (0.00 sec)
